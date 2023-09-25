@@ -1,0 +1,14 @@
+	
+DECLARE
+	TYPE wk_RefCur IS REF CURSOR;           /*Declare Weak Ref Cursor*/
+	cur_var wk_RefCur;                      /*Declare Cursor Variable of ref cursor type*/
+    
+	f_name  employees.first_name%TYPE;      /*Declare two "Anchored Datatype Variable" for holding data from the cursor*/
+    emp_sal employees.salary%TYPE;
+BEGIN
+    OPEN cur_var FOR SELECT first_name, Salary FROM employees WHERE employee_id = 100;
+    FETCH cur_var INTO f_name, emp_sal;
+    CLOSE cur_var;
+    DBMS_OUTPUT.PUT_LINE (f_name ||' '||emp_sal);
+END;
+/
